@@ -10,3 +10,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.app {
+  background-color: #191919;
+}
+
+.job {
+  @apply bg-white rounded-lg shadow-2xl p-6;
+}
+
+.job__body {
+  min-height: 400px;
+}
+
+.rating {
+  @apply flex items-center;
+}
+
+.rating__bar {
+  @apply overflow-hidden h-2 text-xs flex rounded bg-gray-200 flex-1;
+}
+
+.rating__bar-inner {
+  @apply shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center;
+}
