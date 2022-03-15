@@ -1,7 +1,6 @@
 import React from "react";
 
-function Rating(props) {
-  const rating = props.value;
+function Rating({ value: rating }) {
   const colors = {
     0: "#ef4444",
     1: "#f26440",
@@ -21,7 +20,7 @@ function Rating(props) {
   return (
     <div className="rating">
       <p
-        className="rating__badge mr-2"
+        className="rating__badge mr-3"
         style={{ borderColor: color, color: color }}
       >
         {rating}
