@@ -21,10 +21,7 @@ function Job(props) {
         <Info label="IR35" value={info.ir35} />
         <Info label="Remote" value={info.remote} />
       </div>
-      <div className="flex">
-        <button className="button flex-1 mr-2">Dismiss</button>
-        <button className="button flex-1 is-pink">View</button>
-      </div>
+      <div className="flex">{props.children}</div>
     </div>
   );
 }
