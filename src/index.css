@@ -19,8 +19,12 @@ body {
   @apply bg-white rounded-lg shadow-2xl p-6;
 }
 
-.job__body {
-  min-height: 400px;
+.job__info {
+  @apply flex flex-wrap;
+}
+
+.job__info .info {
+  @apply mr-4;
 }
 
 .rating {
@@ -33,4 +37,16 @@ body {
 
 .rating__bar-inner {
   @apply shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center;
+}
+
+.button {
+  @apply bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded;
+}
+
+.button.is-pink {
+  @apply bg-pink-500 hover:bg-pink-700;
+}
+
+.info__label {
+  @apply font-bold;
 }
