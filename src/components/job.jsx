@@ -11,9 +11,13 @@ function Job(props) {
       <div className="mb-2">
         <Rating value={10} />
       </div>
-      <div className="job__info mb-8">
+      <div className="job__info mb-2">
+        <Info label="Rate" value="£300 - £400" />
+      </div>
+      <div className="job__info-sub mb-8">
+        <Info label="Length" value="6 Months" />
         <Info label="IR35" value="Outside" />
-        <Info label="Rate" value="£400" />
+        <Info label="Remote" value="Yes" />
       </div>
       <div className="flex">
         <button className="button flex-1 mr-2">Dismiss</button>

@@ -23,8 +23,16 @@ body {
   @apply flex flex-wrap;
 }
 
+.job__info-sub {
+  @apply flex flex-wrap text-sm text-gray-800;
+}
+
 .job__info .info {
   @apply mr-4;
+}
+
+.job__info-sub .info {
+  @apply flex-1;
 }
 
 .rating {
