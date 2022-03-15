@@ -1,9 +1,9 @@
 import React from "react";
 import Info from "./common/info";
-import Rating from "./common/rating";
+import Score from "./common/score";
 
 function Job(props) {
-  const { title, rating, info } = props.data;
+  const { title, rate, length, ir35, remote, description, score } = props.data;
 
   return (
     <div className="job">
@@ -11,15 +11,15 @@ function Job(props) {
         <p className="job__title">{title}</p>
       </div>
       <div className="mb-3">
-        <Rating value={rating} />
+        <Score value={score} />
       </div>
       <div className="job__info mb-2">
-        <Info label="Rate" value={info.rate} />
+        <Info label="Rate" value={rate} />
       </div>
       <div className="job__info-sub mb-8">
-        <Info label="Length" value={info.length} />
-        <Info label="IR35" value={info.ir35} />
-        <Info label="Remote" value={info.remote} />
+        <Info label="Length" value={length} />
+        <Info label="IR35" value={ir35} />
+        <Info label="Remote" value={remote} />
       </div>
       <div className="flex">{props.children}</div>
     </div>

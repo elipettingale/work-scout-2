@@ -1,6 +1,6 @@
 import React from "react";
 
-function Rating({ value: rating }) {
+function Score({ value: score }) {
   const colors = {
     0: "#ef4444",
     1: "#f26440",
@@ -15,21 +15,21 @@ function Rating({ value: rating }) {
     10: "#84cc16",
   };
 
-  const color = colors[Math.round(rating)];
+  const color = colors[Math.round(score)];
 
   return (
-    <div className="rating">
+    <div className="score">
       <p
-        className="rating__badge mr-3"
+        className="score__badge mr-3"
         style={{ borderColor: color, color: color }}
       >
-        {rating}
+        {score}
       </p>
-      <div className="rating__bar">
+      <div className="score__bar">
         <div
-          className="rating__bar-inner"
+          className="score__bar-inner"
           style={{
-            width: rating * 10 + "%",
+            width: score * 10 + "%",
             backgroundColor: color,
           }}
         ></div>
@@ -38,4 +38,4 @@ function Rating({ value: rating }) {
   );
 }
 
-export default Rating;
+export default Score;

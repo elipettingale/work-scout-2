@@ -43,19 +43,19 @@ body {
   @apply mr-12;
 }
 
-.rating {
+.score {
   @apply flex items-center;
 }
 
-.rating__badge {
+.score__badge {
   @apply border-2 rounded-xl h-8 w-9 leading-7 text-center font-bold;
 }
 
-.rating__bar {
+.score__bar {
   @apply overflow-hidden h-2 text-xs flex rounded bg-gray-200 flex-1;
 }
 
-.rating__bar-inner {
+.score__bar-inner {
   @apply shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center;
 }
 
