@@ -2,17 +2,49 @@ import React, { Component } from "react";
 import Job from "./job";
 
 class Jobs extends Component {
-  state = {};
+  state = {
+    jobs: [
+      {
+        id: 1,
+        title: "React Developer",
+        rating: 10,
+        info: {
+          rate: "£300 - £400",
+          length: "6 Months",
+          ir35: "Outside",
+          remote: "Yes",
+        },
+      },
+      {
+        id: 2,
+        title: "Contract PHP Developer",
+        rating: 7.5,
+        info: {
+          rate: "£300 - £400",
+          length: "6 Months",
+          ir35: "Inside",
+          remote: "Yes",
+        },
+      },
+      {
+        id: 3,
+        title: "Senior Laravel Developer",
+        rating: 2,
+        info: {
+          rate: "£200 - £300",
+          length: "3 Months",
+          ir35: "Inside",
+          remote: "No",
+        },
+      },
+    ],
+  };
   render() {
     return (
       <div className="grid grid-cols-2 grid-flow-rows gap-8">
-        <Job>Job 1</Job>
-        <Job>Job 2</Job>
-        <Job>Job 3</Job>
-        <Job>Job 4</Job>
-        <Job>Job 5</Job>
-        <Job>Job 6</Job>
-        <Job>Job 7</Job>
+        {this.state.jobs.map((job) => (
+          <Job key={job.id} data={job}></Job>
+        ))}
       </div>
     );
   }
