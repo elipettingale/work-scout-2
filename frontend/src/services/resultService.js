@@ -1,4 +1,4 @@
-const jobs = [
+const results = [
   {
     id: 1,
     title: "React Developer",
@@ -31,6 +31,6 @@ const jobs = [
   },
 ];
 
-export function getJobs() {
-  return { data: jobs };
+export function getResults() {
+  return { data: results };
 }

@@ -15,11 +15,11 @@ body {
   background-color: #191919;
 }
 
-.job {
+.result {
   @apply bg-white rounded-lg shadow-2xl p-6;
 }
 
-.job__title {
+.result__title {
   @apply text-2xl;
 
   white-space: nowrap;
@@ -27,19 +27,19 @@ body {
   text-overflow: ellipsis;
 }
 
-.job__info {
+.result__info {
   @apply flex flex-wrap;
 }
 
-.job__info-sub {
+.result__info-sub {
   @apply flex flex-wrap text-sm text-gray-800;
 }
 
-.job__info .info {
+.result__info .info {
   @apply mr-4;
 }
 
-.job__info-sub .info {
+.result__info-sub .info {
   @apply mr-12;
 }
 

@@ -2,21 +2,21 @@ import React from "react";
 import Info from "./common/info";
 import Score from "./common/score";
 
-function Job(props) {
+function Result(props) {
   const { title, rate, length, ir35, remote, description, score } = props.data;
 
   return (
-    <div className="job">
+    <div className="result">
       <div className="mb-3">
-        <p className="job__title">{title}</p>
+        <p className="result__title">{title}</p>
       </div>
       <div className="mb-3">
         <Score value={score} />
       </div>
-      <div className="job__info mb-2">
+      <div className="result__info mb-2">
         <Info label="Rate" value={rate} />
       </div>
-      <div className="job__info-sub mb-8">
+      <div className="result__info-sub mb-8">
         <Info label="Length" value={length} />
         <Info label="IR35" value={ir35} />
         <Info label="Remote" value={remote} />
@@ -26,4 +26,4 @@ function Job(props) {
   );
 }
 
-export default Job;
+export default Result;
