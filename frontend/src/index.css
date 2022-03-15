@@ -15,8 +15,8 @@ body {
   background-color: #191919;
 }
 
-.result {
-  @apply bg-white rounded-lg shadow-2xl p-6;
+.results .result {
+  @apply bg-white rounded-lg shadow-2xl p-6 mb-8;
 }
 
 .result__title {

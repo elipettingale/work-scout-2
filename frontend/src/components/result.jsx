@@ -16,12 +16,12 @@ function Result(props) {
       <div className="result__info mb-2">
         <Info label="Rate" value={rate} />
       </div>
-      <div className="result__info-sub mb-8">
+      <div className="result__info-sub">
         <Info label="Length" value={length} />
         <Info label="IR35" value={ir35} />
         <Info label="Remote" value={remote} />
       </div>
-      <div className="flex">{props.children}</div>
+      {props.children}
     </div>
   );
 }
