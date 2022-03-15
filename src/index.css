@@ -19,6 +19,14 @@ body {
   @apply bg-white rounded-lg shadow-2xl p-6;
 }
 
+.job__title {
+  @apply text-2xl;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .job__info {
   @apply flex flex-wrap;
 }

@@ -5,10 +5,12 @@ import Rating from "./common/rating";
 function Job(props) {
   return (
     <div className="job">
-      <div className="mb-2">
-        <p className="text-3xl">Title</p>
+      <div className="mb-3">
+        <p className="job__title">
+          Contract PHP Developer with React Experience
+        </p>
       </div>
-      <div className="mb-2">
+      <div className="mb-3">
         <Rating value={10} />
       </div>
       <div className="job__info mb-2">
