@@ -48,7 +48,7 @@ body {
 }
 
 .rating__badge {
-  @apply border-2 border-gray-500 rounded-xl h-8 w-8 leading-7 text-center;
+  @apply border-2 rounded-xl h-8 w-9 leading-7 text-center font-bold;
 }
 
 .rating__bar {

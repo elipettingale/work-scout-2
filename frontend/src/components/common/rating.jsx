@@ -16,15 +16,22 @@ function Rating(props) {
     10: "#84cc16",
   };
 
+  const color = colors[Math.round(rating)];
+
   return (
     <div className="rating">
-      <p className="rating__badge mr-2">{rating}</p>
+      <p
+        className="rating__badge mr-2"
+        style={{ borderColor: color, color: color }}
+      >
+        {rating}
+      </p>
       <div className="rating__bar">
         <div
           className="rating__bar-inner"
           style={{
             width: rating * 10 + "%",
-            backgroundColor: colors[Math.round(rating)],
+            backgroundColor: color,
           }}
         ></div>
       </div>
