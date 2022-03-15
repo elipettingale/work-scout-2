@@ -5,7 +5,7 @@ class Jobs extends Component {
   state = {};
   render() {
     return (
-      <div className="grid grid-cols-3 grid-flow-rows gap-8">
+      <div className="grid grid-cols-2 grid-flow-rows gap-8">
         <Job>Job 1</Job>
         <Job>Job 2</Job>
         <Job>Job 3</Job>

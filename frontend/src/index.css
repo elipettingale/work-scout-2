@@ -40,7 +40,7 @@ body {
 }
 
 .job__info-sub .info {
-  @apply flex-1;
+  @apply mr-12;
 }
 
 .rating {
