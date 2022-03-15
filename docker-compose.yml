@@ -1,8 +1,8 @@
-version: "3.8"
+version: "3.7"
 
 services:
   frontend:
-    container_name: work-scout-frontend
+    container_name: workscout-frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -14,3 +14,50 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - CI=true
+
+  backend:
+    build:
+      args:
+        user: elipettingale
+        uid: 1000
+      context: ./backend/
+      dockerfile: Dockerfile
+    container_name: workscout-backend
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./backend/:/var/www
+    networks:
+      - workscout
+
+  db:
+    image: mysql:8.0.28
+    container_name: workscout-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: work_scout
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_PASSWORD: password
+      MYSQL_USER: docker
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - workscout
+
+  nginx:
+    image: nginx:alpine
+    container_name: workscout-nginx
+    restart: unless-stopped
+    ports:
+      - 8001:80
+    volumes:
+      - ./backend/:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - workscout
+
+networks:
+  workscout:
+    driver: bridge
