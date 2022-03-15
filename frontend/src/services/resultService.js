@@ -34,3 +34,8 @@ const results = [
 export function getResults() {
   return { data: results };
 }
+
+export function dismissResult(result) {
+  let index = results.findIndex((item) => item.id === result.id);
+  results.splice(index, 1);
+}

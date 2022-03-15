@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Result from "./result";
 import _ from "lodash";
-import { getResults } from "../services/resultService";
+import { dismissResult, getResults } from "../services/resultService";
 
 class Results extends Component {
   state = {
@@ -13,14 +13,23 @@ class Results extends Component {
     this.setState({ results });
   };
 
-  handleDismissResult = (result) => {
+  handleDismissResult = async (result) => {
+    const previousResults = [...this.state.results];
+
     const results = [...this.state.results];
     _.remove(results, result);
-
     this.setState({ results });
+
+    try {
+      await dismissResult(result);
+    } catch (ex) {
+      this.setState({ results: previousResults });
+    }
   };
 
-  handleViewResult = (result) => {};
+  handleViewResult = (result) => {
+    // todo: init then open modal
+  };
 
   render() {
     return (
