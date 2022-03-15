@@ -18,7 +18,7 @@ function Rating(props) {
 
   return (
     <div className="rating">
-      <p className="mr-2">{rating}</p>
+      <p className="rating__badge mr-2">{rating}</p>
       <div className="rating__bar">
         <div
           className="rating__bar-inner"
