@@ -15,7 +15,7 @@ class ResultParser
 
     public function getMinRate()
     {
-        if ($this->text->matchesAny(['£\d*k ?- ?£\d*k', '£\d*k'])) {
+        if ($this->text->matchesAny(['£\d*k ?- ?£\d*k', '£\d*k', '£\d\d,\d\d\d'])) {
             return null;
         }
 
@@ -28,7 +28,7 @@ class ResultParser
 
     public function getMaxRate()
     {
-        if ($this->text->matchesAny(['£\d*k ?- ?£\d*k', '£\d*k'])) {
+        if ($this->text->matchesAny(['£\d*k ?- ?£\d*k', '£\d*k', '£\d\d,\d\d\d'])) {
             return null;
         }
 
@@ -50,11 +50,11 @@ class ResultParser
 
     public function getIr35()
     {
-        if ($this->text->contains('outside ir35')) {
+        if ($this->text->containsAny(['outside ir35', 'outside of ir35', 'outside of the ir35'])) {
             return true;
         }
 
-        if ($this->text->contains('inside ir35')) {
+        if ($this->text->containsAny(['inside ir35', 'inside of ir35', 'inside of the ir35'])) {
             return false;
         }
 
@@ -63,12 +63,12 @@ class ResultParser
 
     public function getRemote()
     {
-        if ($this->text->contains('fully remote')) {
-            return true;
-        }
-
         if ($this->text->containsAny(['part remote', 'partially remote', 'hybrid working'])) {
             return false;
+        }
+
+        if ($this->text->contains('remote')) {
+            return true;
         }
 
         return null;

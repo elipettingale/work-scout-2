@@ -16,7 +16,7 @@ class Reed implements Transformer
     public function getData(array $data): array 
     {
         $rawDescription = html_entity_decode($data['jobDescription']);
-        $parser = new ResultParser($rawDescription);
+        $parser = new ResultParser($data['jobTitle'] . $rawDescription);
 
         return [
             'job_site' => JobSite::REED,

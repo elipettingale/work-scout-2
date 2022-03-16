@@ -19,7 +19,7 @@ class ResultScoreCalculator
         $score += $this->remoteScore();
         $score += $this->rateScore();
 
-        return $score;
+        return $score > 0 ? $score : 0;
     }
 
     private function ir35Score()

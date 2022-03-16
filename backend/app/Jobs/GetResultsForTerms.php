@@ -71,8 +71,6 @@ class GetResultsForTerms implements ShouldQueue
 
         $result->save();
 
-        dd('stop');
-
         // todo: if score is > 0 broadcast event
 
         return true;
