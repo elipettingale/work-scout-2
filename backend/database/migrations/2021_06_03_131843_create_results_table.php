@@ -23,7 +23,7 @@ class CreateResultsTable extends Migration
             $table->text('description');
 
             $table->integer('score');
-            $table->array('keywords');
+            $table->json('keywords');
             $table->json('raw');
 
             $table->dateTime('read_at')->nullable();

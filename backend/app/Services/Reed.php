@@ -8,21 +8,42 @@ class Reed implements ApiService
 {
     private const BASE_URL = 'https://www.reed.co.uk/api/1.0/';
 
-    // todo: check both public classes return only result specific data
-
-    public function getSearchResults(array $terms): array
+    public function getResults(array $terms): array
     {
-        // todo: perform per page loop until no results then return all at once
+        $results = [];
 
+        $page = 1;
+        $done = false;
+       
+        while (!$done) {
+            $data = $this->getResultsByPage($terms, $page);
+            $results = array_merge($results, $data);
+
+            if (count($data) < 100) {
+                $done = true;
+            }
+
+            $page++;
+        }
+
+        return $results;
+    }
+
+    private function getResultsByPage(array $terms, $page)
+    {
         $keywords = implode('+', $terms);
         $resultsToSkip = ($page * 100) - 100;
 
-        return $this->get("search?keywords={$keywords}&resultsToSkip={$resultsToSkip}");
+        $response = $this->get("search?keywords={$keywords}&resultsToSkip={$resultsToSkip}");
+        
+        return json_decode($response, true)['results'];
     }
 
-    public function getResultDetails(string $id): array
+    public function getFullResult(string $reference): array
     {
-        return $this->get("jobs/$id");
+        $response =  $this->get("jobs/$reference");
+
+        return json_decode($response, true);
     }
 
     private function get($url)

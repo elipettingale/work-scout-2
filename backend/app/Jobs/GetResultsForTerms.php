@@ -10,6 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Contracts\ApiService;
 use App\Contracts\Transformer;
+use App\Models\Result;
 
 class GetResultsForTerms implements ShouldQueue
 {
@@ -28,10 +29,36 @@ class GetResultsForTerms implements ShouldQueue
 
     public function handle()
     {
-        // todo: use service to get all results
-        // todo: for each result use service to get details
-        // todo: use transformer to transform details
-        // todo: calculate ratings for result
-        // todo: if rating is not 0 save result in db
+        $results = $this->service->getResults($this->terms);
+
+        foreach ($results as $data) {
+            $this->handleResult($data);
+        }
+    }
+
+    public function handleResult(array $data)
+    {
+        $reference = $this->transformer->getReference($data);
+
+        $exists = Result::query()
+            ->where('reference', $reference)
+            ->exists();
+
+        if ($exists) {
+            return false;
+        }
+
+        $data = $this->service->getFullResult($reference);
+        $transformedData = $this->transformer->getData($data);
+
+        dd($transformedData);
+
+        $score = 0; // todo: calculate score using $data
+
+        if ($score === 0) {
+            return false;
+        }
+
+        return true;
     }
 }
