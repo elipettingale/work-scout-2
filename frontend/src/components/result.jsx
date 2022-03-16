@@ -3,7 +3,7 @@ import Info from "./common/info";
 import Score from "./common/score";
 
 function Result(props) {
-  const { title, rate, length, ir35, remote, description, score } = props.data;
+  const { title, score, rate, length, ir35, remote } = props.data;
 
   return (
     <div className="result">

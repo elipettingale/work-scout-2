@@ -27,10 +27,6 @@ class Results extends Component {
     }
   };
 
-  handleViewResult = (result) => {
-    // todo: init then open modal
-  };
-
   render() {
     return (
       <div className="flex">
@@ -59,12 +55,13 @@ class Results extends Component {
           >
             Dismiss
           </button>
-          <button
+          <a
+            href={result.url}
+            target="_blank"
             className="button flex-1 is-pink"
-            onClick={() => this.handleViewResult(result)}
           >
-            View
-          </button>
+            Apply
+          </a>
         </div>
         <div className="mt-8">{result.description}</div>
       </Result>
