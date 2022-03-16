@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use App\Structs\Text;
+
 class ResultScoreCalculator
 {
     private $data;
@@ -18,6 +20,7 @@ class ResultScoreCalculator
         $score += $this->ir35Score();
         $score += $this->remoteScore();
         $score += $this->rateScore();
+        $score += $this->skillScore();
 
         return $score > 0 ? $score : 0;
     }
@@ -69,5 +72,32 @@ class ResultScoreCalculator
         }
 
         return 0;
+    }
+
+    private function skillScore()
+    {
+        $skills = [
+            'laravel',
+            'wordpress',
+            'vue',
+            'php',
+            'developer',
+            'backend',
+            'react',
+            'frontend',
+            'mysql'
+        ];
+
+        $text = new Text($this->data['title'] . $this->data['description']);
+
+        if ($text->containsAny(['c#', 'c++', 'magento'])) {
+            return -5;
+        }
+
+        if ($text->containsAtLeast($skills, 3)) {
+            return 0;
+        }
+
+        return -3;
     }
 }

@@ -25,12 +25,19 @@ class Results extends Component {
 
     const results = [...this.state.results];
     _.remove(results, result);
-    this.setState({ results });
+
+    this.setState({
+      results: results,
+      activeResult: results[0],
+    });
 
     try {
       await dismissResult(result);
     } catch (ex) {
-      this.setState({ results: previousResults });
+      this.setState({
+        results: previousResults,
+        activeResult: previousResults[0],
+      });
     }
   };
 
