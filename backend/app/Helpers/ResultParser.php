@@ -50,11 +50,11 @@ class ResultParser
 
     public function getIr35()
     {
-        if ($this->text->containsAny(['outside ir35', 'outside of ir35', 'outside of the ir35'])) {
+        if ($this->text->containsAny(['outside ir35', 'outside of ir35', 'outside of the ir35', 'ir35: outside'])) {
             return true;
         }
 
-        if ($this->text->containsAny(['inside ir35', 'inside of ir35', 'inside of the ir35'])) {
+        if ($this->text->containsAny(['inside ir35', 'inside of ir35', 'inside of the ir35', 'ir35: inside'])) {
             return false;
         }
 
