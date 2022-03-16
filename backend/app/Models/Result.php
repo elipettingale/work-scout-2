@@ -19,8 +19,8 @@ class Result extends Model
     ];
 
     protected $casts = [
-        'keywords' => 'array'
-        'raw_data' => 'json'
+        'keywords' => 'array',
+        'raw' => 'json'
     ];
 
     public function parent()

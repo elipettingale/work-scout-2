@@ -3,10 +3,10 @@
 return [
 
     'terms' => [
-        'laravel',
-        'wordpress',
-        'vue',
-        'react'
+        ['laravel'],
+        ['wordpress'],
+        ['vue'],
+        ['react']
     ]
 
 ];

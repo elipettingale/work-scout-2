@@ -22,8 +22,9 @@ class CreateResultsTable extends Migration
             $table->string('remote');
             $table->text('description');
 
-            $table->integer('score')->nullable();
-            $table->json('data');
+            $table->integer('score');
+            $table->array('keywords');
+            $table->json('raw');
 
             $table->dateTime('read_at')->nullable();
             $table->timestamps();
