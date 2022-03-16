@@ -12,7 +12,13 @@ body {
 }
 
 .app {
-  background-color: #191919;
+  background: linear-gradient(
+    90deg,
+    #191919 0%,
+    #191919 50%,
+    white 50%,
+    white 100%
+  );
 }
 
 .results .result {

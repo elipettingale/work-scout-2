@@ -30,12 +30,12 @@ class Results extends Component {
   render() {
     return (
       <div className="flex">
-        <div className="flex-1 h-screen p-8 overflow-scroll results">
+        <div className="flex-1 h-screen p-8 overflow-scroll results max-w-3xl ml-auto">
           {this.state.results.map((result) => (
             <Result key={result.id} data={result}></Result>
           ))}
         </div>
-        <div className="flex-1 bg-white h-screen p-8 overflow-scroll">
+        <div className="flex-1 bg-white h-screen p-8 overflow-scroll max-w-3xl mr-auto">
           {this.renderPane()}
         </div>
       </div>
@@ -63,7 +63,10 @@ class Results extends Component {
             Apply
           </a>
         </div>
-        <div className="mt-8">{result.description}</div>
+        <div
+          className="mt-8"
+          dangerouslySetInnerHTML={{ __html: result.description }}
+        ></div>
       </Result>
     );
   }

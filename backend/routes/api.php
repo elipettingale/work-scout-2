@@ -62,7 +62,9 @@ Route::get('results', function() {
             'rate' => getRate($item),
             'length' => getLength($item),
             'ir35' => getIr35($item),
-            'remote' => $item->remote ? 'Yes' : 'No'
+            'remote' => $item->remote ? 'Yes' : 'No',
+            'description' => $item->description,
+            'url' => $item->url
         ];
     }
 
