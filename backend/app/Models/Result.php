@@ -13,14 +13,24 @@ class Result extends Model
         'job_site',
         'reference',
         'title',
+        'min_rate',
+        'max_rate',
         'length',
         'ir35',
-        'remote'
+        'remote',
+        'description',
+        'url'
+    ];
+    
+    protected $dates = [
+        'read_at'
     ];
 
     protected $casts = [
+        'ir35' => 'bool',
+        'remote' => 'bool',
         'keywords' => 'array',
-        'raw' => 'json'
+        'raw' => 'array'
     ];
 
     public function parent()

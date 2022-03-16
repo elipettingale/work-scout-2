@@ -5,8 +5,7 @@ return [
     'terms' => [
         ['laravel'],
         ['wordpress'],
-        ['vue'],
-        ['react']
+        ['vue']
     ]
 
 ];

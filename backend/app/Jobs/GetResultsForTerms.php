@@ -30,11 +30,7 @@ class GetResultsForTerms implements ShouldQueue
 
     public function handle()
     {
-        $service = $this->service;
-
-        $results = cache()->remember('reed:results', 3600, function() use ($service) {
-            return $service->getResults($this->terms);
-        });
+        $results = $this->service->getResults($this->terms);
         
         foreach ($results as $data) {
             $this->handleResult($data);
@@ -53,24 +49,31 @@ class GetResultsForTerms implements ShouldQueue
             return false;
         }
 
-        $service = $this->service;
-
-        $rawData = cache()->remember("reed:{$reference}", 3600, function() use ($service, $reference) {
-            return $service->getFullResult($reference);
-        });
-
-        $data = $this->transformer->getData($rawData);
+        $raw = $this->service->getFullResult($reference);
+        $data = $this->transformer->getData($raw);
 
         $scoreCalculator = new ResultScoreCalculator($data);
         $score = $scoreCalculator->getScore();
 
-        // todo: rate skills
+        // todo: add score based on skills
 
-        dd($score);
+        $result = new Result();
+        $result->fill($data);
+        $result->score = $score;
+        $result->raw = $raw;
 
-        // todo: save result, scan for keywords
-        // todo: if score is 0, then mark as read (and don't broadcast event)
-        // todo: broadcast new result
+        if ($score === 0) {
+            $result->read_at = now();
+        }
+
+        $result->keywords = []; // todo: scan for keywords
+        // todo: check for duplicates
+
+        $result->save();
+
+        dd('stop');
+
+        // todo: if score is > 0 broadcast event
 
         return true;
     }

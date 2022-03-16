@@ -34,7 +34,7 @@ class Reed implements ApiService
         $keywords = implode('+', $terms);
         $resultsToSkip = ($page * 100) - 100;
 
-        $response = $this->get("search?keywords={$keywords}&resultsToSkip={$resultsToSkip}");
+        $response = $this->get("search?keywords={$keywords}&contract=true&resultsToSkip={$resultsToSkip}");
         
         return json_decode($response, true)['results'];
     }
