@@ -16,10 +16,11 @@ class CreateResultsTable extends Migration
             $table->unsignedBigInteger('parent_id')->nullable();
 
             $table->string('title');
-            $table->string('rate');
-            $table->string('length');
-            $table->string('ir35');
-            $table->string('remote');
+            $table->integer('min_rate')->nullable();
+            $table->integer('max_rate')->nullable();
+            $table->integer('length')->nullable();
+            $table->boolean('ir35')->nullable();
+            $table->boolean('remote')->nullable();
             $table->text('description');
             $table->string('url');
 

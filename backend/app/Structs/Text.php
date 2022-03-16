@@ -11,17 +11,33 @@ class Text
         $this->text = $text;
     }
 
-    public function firstMatch(array $patterns)
+    public function getFirstMatch(array $patterns)
     {
         foreach ($patterns as $pattern) {
             preg_match("/$pattern/i", $this->text, $matches);
             
-            if (isset($matches[0])) {
-                return $matches[0];
+            if (isset($matches[1])) {
+                return $matches[1];
             }
         }
     
         return null;
+    }
+
+    public function matches($pattern)
+    {
+        return preg_match("/$pattern/i", $this->text);
+    }
+    
+    public function matchesAny(array $patterns)
+    {
+        foreach ($patterns as $pattern) {
+            if (preg_match("/$pattern/i", $this->text)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function contains(string $value, bool $strict = false): bool

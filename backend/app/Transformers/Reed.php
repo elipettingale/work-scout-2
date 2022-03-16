@@ -15,14 +15,15 @@ class Reed implements Transformer
 
     public function getData(array $data): array 
     {
-        $rawDescription = html_entity_decode($data['jobDescription']);
+        $rawDescription = html_entity_decode('sdfsdfsdfsdf£400, £600');
         $parser = new ResultParser($rawDescription);
 
         return [
             'job_site' => JobSite::REED,
             'reference' => $data['jobId'],
             'title' => $data['jobTitle'],
-            'rate' => $parser->getRate(),
+            'min_rate' => $parser->getMinRate(),
+            'max_rate' => $parser->getMaxRate(),
             'length' => $parser->getLength(),
             'ir35' => $parser->getIr35(),
             'remote' => $parser->getRemote(),

@@ -11,6 +11,7 @@ use Illuminate\Queue\SerializesModels;
 use App\Contracts\ApiService;
 use App\Contracts\Transformer;
 use App\Models\Result;
+use App\Helpers\ResultScoreCalculator;
 
 class GetResultsForTerms implements ShouldQueue
 {
@@ -59,15 +60,17 @@ class GetResultsForTerms implements ShouldQueue
         });
 
         $data = $this->transformer->getData($rawData);
-        dd($data);
 
-        $score = 0; // todo: calculate score using $data
+        $scoreCalculator = new ResultScoreCalculator($data);
+        $score = $scoreCalculator->getScore();
 
-        if ($score === 0) {
-            return false;
-        }
+        // todo: rate skills
+
+        dd($score);
 
         // todo: save result, scan for keywords
+        // todo: if score is 0, then mark as read (and don't broadcast event)
+        // todo: broadcast new result
 
         return true;
     }

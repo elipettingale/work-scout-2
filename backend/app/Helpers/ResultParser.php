@@ -13,28 +13,49 @@ class ResultParser
         $this->text = new Text($text);
     }
 
-    public function getRate()
+    public function getMinRate()
     {
-        return $this->text->firstMatch([
-            '£\d* ?- ?£\d*', '£\d*k ?- ?£\d*k', '£\d*k', '£\d*'
+        if ($this->text->matchesAny(['£\d*k ?- ?£\d*k', '£\d*k'])) {
+            return null;
+        }
+
+        $minRate = $this->text->getFirstMatch([
+            '£(\d*) ?- ?£\d*', '£(\d*)'
         ]);
+
+        return $minRate ? (int) $minRate : null;
+    }
+
+    public function getMaxRate()
+    {
+        if ($this->text->matchesAny(['£\d*k ?- ?£\d*k', '£\d*k'])) {
+            return null;
+        }
+
+        $maxRate = $this->text->getFirstMatch([
+            '£\d* ?- ?£(\d*)', '£(\d*)'
+        ]);
+
+        return $maxRate ? (int) $maxRate : null;
     }
 
     public function getLength()
     {
-        return $this->text->firstMatch([
-            '\d* ?- ?\d* ?months?', '\d* ?months?'
+        $length = $this->text->getFirstMatch([
+            '(\d*) ?- ?\d* ?months?', '(\d*) ?months?'
         ]);
+
+        return $length ? (int) $length : null;
     }
 
     public function getIr35()
     {
         if ($this->text->contains('outside ir35')) {
-            return 'Outside';
+            return true;
         }
 
         if ($this->text->contains('inside ir35')) {
-            return 'Inside';
+            return false;
         }
 
         return null;
@@ -43,11 +64,11 @@ class ResultParser
     public function getRemote()
     {
         if ($this->text->contains('fully remote')) {
-            return 'Fully';
+            return true;
         }
 
         if ($this->text->containsAny(['part remote', 'partially remote', 'hybrid working'])) {
-            return 'Partial';
+            return false;
         }
 
         return null;
