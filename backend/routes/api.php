@@ -70,3 +70,7 @@ Route::get('results', function() {
 
     return $results;
 });
+
+Route::post('results/{result}/dismiss', function(Result $result) {
+    return $result->markAsRead();
+});
