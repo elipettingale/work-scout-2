@@ -32,9 +32,6 @@ class Results extends Component {
   };
 
   render() {
-    const activeResult = this.state.results[0];
-    console.log(activeResult);
-
     return (
       <div className="flex">
         <div className="flex-1 h-screen p-8 overflow-scroll results">
