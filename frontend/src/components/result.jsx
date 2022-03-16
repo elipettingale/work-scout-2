@@ -6,7 +6,10 @@ function Result(props) {
   const { title, score, rate, length, ir35, remote } = props.data;
 
   return (
-    <div className="result">
+    <div
+      className={"result" + (props.isActive ? " is-active" : "")}
+      onClick={props.onClick}
+    >
       <div className="mb-3">
         <p className="result__title">{title}</p>
       </div>

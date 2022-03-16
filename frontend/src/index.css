@@ -22,7 +22,18 @@ body {
 }
 
 .results .result {
-  @apply bg-white rounded-lg shadow-2xl p-6 mb-8;
+  @apply bg-white rounded-lg shadow-2xl p-6 mb-8 cursor-pointer;
+  transition: all 150ms ease-in-out;
+  opacity: 0.8;
+}
+
+.results .result:hover {
+  opacity: 0.9;
+}
+
+.results .result.is-active {
+  transform: translateX(-20px);
+  opacity: 1;
 }
 
 .result__title {

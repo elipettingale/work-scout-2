@@ -6,11 +6,18 @@ import { dismissResult, getResults } from "../services/resultService";
 class Results extends Component {
   state = {
     results: [],
+    activeResult: "",
   };
 
   componentDidMount = async () => {
     const { data: results } = await getResults();
-    this.setState({ results });
+
+    if (results.length > 0) {
+      this.setState({
+        results: results,
+        activeResult: results[0],
+      });
+    }
   };
 
   handleDismissResult = async (result) => {
@@ -27,24 +34,39 @@ class Results extends Component {
     }
   };
 
+  setActiveResult = (result) => {
+    console.log("test");
+
+    this.setState({
+      activeResult: result,
+    });
+  };
+
   render() {
     return (
       <div className="flex">
-        <div className="flex-1 h-screen p-8 overflow-scroll results max-w-3xl ml-auto">
-          {this.state.results.map((result) => (
-            <Result key={result.id} data={result}></Result>
-          ))}
+        <div className="flex-1 h-screen p-8 overflow-scroll results ">
+          <div className="max-w-2xl ml-auto">
+            {this.state.results.map((result) => (
+              <Result
+                key={result.id}
+                data={result}
+                isActive={result === this.state.activeResult}
+                onClick={() => this.setActiveResult(result)}
+              />
+            ))}
+          </div>
         </div>
-        <div className="flex-1 bg-white h-screen p-8 overflow-scroll max-w-3xl mr-auto">
-          {this.renderPane()}
+        <div className="flex-1 bg-white h-screen p-8 overflow-scroll">
+          <div className="max-w-2xl mr-auto">{this.renderPane()}</div>
         </div>
       </div>
     );
   }
 
   renderPane() {
-    const result = this.state.results[0];
-    if (typeof result === "undefined") return;
+    const { activeResult: result } = this.state;
+    if (result === "") return;
 
     return (
       <Result key={result.id} data={result}>
