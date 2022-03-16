@@ -4,6 +4,7 @@ namespace App\Transformers;
 
 use App\Contracts\Transformer;
 use App\Enums\JobSite;
+use App\Helpers\ResultParser;
 
 class Reed implements Transformer 
 {
@@ -14,17 +15,19 @@ class Reed implements Transformer
 
     public function getData(array $data): array 
     {
+        $rawDescription = html_entity_decode($data['jobDescription']);
+        $parser = new ResultParser($rawDescription);
+
         return [
             'job_site' => JobSite::REED,
             'reference' => $data['jobId'],
             'title' => $data['jobTitle'],
-            'rate' => null,
-            'length' => null,
-            'ir35' => null,
-            'remote' => null,
-            'description' => null
+            'rate' => $parser->getRate(),
+            'length' => $parser->getLength(),
+            'ir35' => $parser->getIr35(),
+            'remote' => $parser->getRemote(),
+            'description' => $rawDescription,
+            'url' => $data['jobUrl']
         ];
     }
 }
-
-// todo: use clever text lookups to confirm data integrity

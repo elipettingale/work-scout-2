@@ -21,6 +21,7 @@ class CreateResultsTable extends Migration
             $table->string('ir35');
             $table->string('remote');
             $table->text('description');
+            $table->string('url');
 
             $table->integer('score');
             $table->json('keywords');

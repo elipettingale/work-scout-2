@@ -29,8 +29,12 @@ class GetResultsForTerms implements ShouldQueue
 
     public function handle()
     {
-        $results = $this->service->getResults($this->terms);
+        $service = $this->service;
 
+        $results = cache()->remember('reed:results', 3600, function() use ($service) {
+            return $service->getResults($this->terms);
+        });
+        
         foreach ($results as $data) {
             $this->handleResult($data);
         }
@@ -48,16 +52,22 @@ class GetResultsForTerms implements ShouldQueue
             return false;
         }
 
-        $data = $this->service->getFullResult($reference);
-        $transformedData = $this->transformer->getData($data);
+        $service = $this->service;
 
-        dd($transformedData);
+        $rawData = cache()->remember("reed:{$reference}", 3600, function() use ($service, $reference) {
+            return $service->getFullResult($reference);
+        });
+
+        $data = $this->transformer->getData($rawData);
+        dd($data);
 
         $score = 0; // todo: calculate score using $data
 
         if ($score === 0) {
             return false;
         }
+
+        // todo: save result, scan for keywords
 
         return true;
     }
