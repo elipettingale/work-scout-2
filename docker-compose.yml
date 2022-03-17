@@ -25,6 +25,8 @@ services:
     container_name: workscout-backend
     restart: unless-stopped
     working_dir: /var/www/
+    ports:
+      - 8002:6001
     volumes:
       - ./backend/:/var/www
     networks:
@@ -43,6 +45,8 @@ services:
       SERVICE_NAME: mysql
     ports:
       - "3306:3306"
+    volumes:
+      - database:/var/lib/mysql
     networks:
       - workscout
 
@@ -61,3 +65,6 @@ services:
 networks:
   workscout:
     driver: bridge
+
+volumes:
+  database:
