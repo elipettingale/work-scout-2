@@ -42,7 +42,7 @@ class Results extends Component {
 
     this.setState({
       results: results,
-      activeResult: results[0],
+      activeResult: results[0] ? results[0] : "",
     });
 
     try {

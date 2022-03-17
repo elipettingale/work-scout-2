@@ -5,9 +5,9 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Jobs\GetResultsForTerms;
 
-class GetAllResults extends Command
+class GetNewResults extends Command
 {
-    protected $signature = 'app:get-all-results';
+    protected $signature = 'app:get-new-results';
 
     public function handle()
     {
