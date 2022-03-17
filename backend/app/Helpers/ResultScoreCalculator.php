@@ -30,11 +30,11 @@ class ResultScoreCalculator
         $ir35 = $this->data['ir35'];
 
         if ($ir35 === null) {
-            return -5;
+            return -3;
         }
 
         if ($ir35 === false) {
-            return -3;
+            return -10;
         }
 
         return 0;
@@ -45,7 +45,7 @@ class ResultScoreCalculator
         $remote = $this->data['remote'];
 
         if ($remote === null) {
-            return -5;
+            return -3;
         }
 
         if ($remote === false) {
