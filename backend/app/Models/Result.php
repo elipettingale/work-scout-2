@@ -53,4 +53,9 @@ class Result extends Model
         $this->read_at = now();
         $this->save();
     }
+
+    public function transform()
+    {
+        
+    }
 }

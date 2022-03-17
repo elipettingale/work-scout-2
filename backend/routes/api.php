@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Result;
+use App\Transformers\Result as ResultTransformer;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,48 +25,8 @@ Route::get('results', function() {
         ->orderBy('created_at')
         ->get();
 
-    function getIr35($item) {
-        if ($item->ir35 === null) {
-            return '-';
-        }
-
-        return $item->ir35 ? 'Outside' : 'Inside';
-    }
-    
-    function getLength($item) {
-        if ($item->length === null) {
-            return '-';
-        }
-
-        return "{$item->length} Months";
-    }
-
-    function getRate($item) {
-        if ($item->min_rate === null) {
-            return '-';
-        }
-
-        if ($item->min_rate === $item->max_rate) {
-            return "£{$item->min_rate}";
-        }
-
-        return "£{$item->min_rate} - £{$item->max_rate}";
-    }
-
     foreach ($data as $item) {
-        
-
-        $results[] = [
-            'id' => $item->id,
-            'title' => $item->title,
-            'score' => $item->score,
-            'rate' => getRate($item),
-            'length' => getLength($item),
-            'ir35' => getIr35($item),
-            'remote' => $item->remote ? 'Yes' : 'No',
-            'description' => $item->description,
-            'url' => $item->url
-        ];
+        $results[] = ResultTransformer::transform($item);
     }
 
     return $results;
