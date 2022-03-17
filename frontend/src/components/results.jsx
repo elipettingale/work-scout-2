@@ -104,11 +104,35 @@ class Results extends Component {
             Apply
           </a>
         </div>
-        <div
-          className="mt-8"
-          dangerouslySetInnerHTML={{ __html: result.description }}
-        ></div>
+        {this.renderDescription(result)}
       </Result>
+    );
+  }
+
+  renderDescription(result) {
+    let { description } = result;
+    const keywords = [
+      "ir35",
+      "£\\d+ ?- ?£\\d+",
+      "£\\d+",
+      "remote",
+      "\\d+ months",
+    ];
+
+    keywords.forEach((keyword) => {
+      const regex = new RegExp(`(${keyword})`, "gi");
+
+      description = description.replaceAll(
+        regex,
+        '<span class="keyword">$1</span>'
+      );
+    });
+
+    return (
+      <div
+        className="mt-8"
+        dangerouslySetInnerHTML={{ __html: description }}
+      ></div>
     );
   }
 }

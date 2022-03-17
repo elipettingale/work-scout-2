@@ -25,7 +25,6 @@ class CreateResultsTable extends Migration
             $table->string('url');
 
             $table->integer('score');
-            $table->json('keywords');
             $table->json('raw');
 
             $table->dateTime('read_at')->nullable();
