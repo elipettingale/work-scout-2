@@ -57,17 +57,17 @@ class ResultScoreCalculator
 
     private function rateScore()
     {
-        $minRate = $this->data['min_rate'];
+        $maxRate = $this->data['max_rate'];
 
-        if ($minRate === null) {
+        if ($maxRate === null) {
             return -5;
         }
 
-        if ($minRate <= 200) {
+        if ($maxRate <= 200) {
             return -3;
         }
 
-        if ($minRate <= 300) {
+        if ($maxRate <= 300) {
             return -1;
         }
 

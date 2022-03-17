@@ -20,7 +20,7 @@ class ResultParser
         }
 
         $minRate = $this->text->getFirstMatch([
-            '£(\d*) ?- ?£\d*', '£(\d*) ?pd ?- ?£\d* ?pd', '£(\d*)'
+            '£(\d*) ?- ?£?\d*', '£(\d*) ?pd ?- ?£?\d* ?pd', '£(\d*)'
         ]);
 
         return $minRate ? (int) $minRate : null;
@@ -33,7 +33,7 @@ class ResultParser
         }
 
         $maxRate = $this->text->getFirstMatch([
-            '£\d* ?- ?£(\d*)', '£\d* ?pd ?- ?£(\d*) ?pd', '£(\d*)'
+            '£\d* ?- ?£?(\d*)', '£\d* ?pd ?- ?£?(\d*) ?pd', '£(\d*)'
         ]);
 
         return $maxRate ? (int) $maxRate : null;

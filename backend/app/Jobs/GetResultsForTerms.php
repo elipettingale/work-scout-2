@@ -32,7 +32,7 @@ class GetResultsForTerms implements ShouldQueue
     public function handle()
     {
         $results = $this->service->getResults($this->terms);
-        
+
         foreach ($results as $data) {
             $this->handleResult($data);
         }

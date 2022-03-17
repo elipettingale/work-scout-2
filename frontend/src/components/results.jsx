@@ -113,7 +113,7 @@ class Results extends Component {
     let { description } = result;
     const keywords = [
       "ir35",
-      "£\\d+ ?- ?£\\d+",
+      "£\\d+ ?- ?£?\\d+",
       "£\\d+",
       "remote",
       "\\d+ months",
