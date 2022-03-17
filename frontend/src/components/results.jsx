@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import Result from "./result";
 import _ from "lodash";
-import { dismissResult, getResults } from "../services/resultService";
+import {
+  dismissResult,
+  getResults,
+  getResult,
+} from "../services/resultService";
 
 class Results extends Component {
   state = {
@@ -18,6 +22,16 @@ class Results extends Component {
         activeResult: results[0],
       });
     }
+
+    window.Echo.channel("results").listen("ResultCreated", async (e) => {
+      const { data: result } = await getResult(e.id);
+      const results = [result, ...this.state.results];
+
+      this.setState({
+        results: results,
+        activeResult: results[0],
+      });
+    });
   };
 
   handleDismissResult = async (result) => {
@@ -42,8 +56,6 @@ class Results extends Component {
   };
 
   setActiveResult = (result) => {
-    console.log("test");
-
     this.setState({
       activeResult: result,
     });

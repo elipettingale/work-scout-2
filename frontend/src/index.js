@@ -16,10 +16,6 @@ window.Echo = new Echo({
   encrypted: false,
 });
 
-window.Echo.channel("results").listen("ResultCreated", (e) => {
-  console.log(e);
-});
-
 ReactDOM.render(
   <React.StrictMode>
     <App />

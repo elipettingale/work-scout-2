@@ -12,6 +12,7 @@ use App\Contracts\ApiService;
 use App\Contracts\Transformer;
 use App\Models\Result;
 use App\Helpers\ResultScoreCalculator;
+use App\Events\ResultCreated;
 
 class GetResultsForTerms implements ShouldQueue
 {
@@ -71,7 +72,7 @@ class GetResultsForTerms implements ShouldQueue
 
         $result->save();
 
-        // todo: if score is > 0 broadcast event
+        event(new ResultCreated($result));
 
         return true;
     }

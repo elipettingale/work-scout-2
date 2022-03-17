@@ -22,7 +22,7 @@ Route::get('results', function() {
     $data = Result::query()
         ->whereNull('read_at')
         ->whereNull('parent_id')
-        ->orderBy('created_at')
+        ->orderByDesc('created_at')
         ->get();
 
     foreach ($data as $item) {
@@ -30,6 +30,10 @@ Route::get('results', function() {
     }
 
     return $results;
+});
+
+Route::get('results/{result}', function(Result $result) {
+    return ResultTransformer::transform($result);
 });
 
 Route::post('results/{result}/dismiss', function(Result $result) {
