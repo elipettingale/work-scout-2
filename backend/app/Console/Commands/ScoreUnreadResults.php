@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Result;
 use App\Helpers\ResultScoreCalculator;
+use Carbon\Carbon;
 
 class ScoreUnreadResults extends Command
 {
@@ -13,15 +14,17 @@ class ScoreUnreadResults extends Command
     public function handle()
     {
         $results = Result::query()
-            ->whereNull('read_at')
             ->get();
 
         foreach ($results as $result) {
-            $scoreCalculator = new ResultScoreCalculator($result->toArray());
-            $score = $scoreCalculator->getScore();
-            $result->score = $score;
+            $date = Carbon::createFromFormat('d/m/Y', $result->raw['datePosted']);
+            $result->created_at = $date;
 
-            if ($score === 0) {
+            if ($date->format('Y-m-d') >= now()->subWeek()->format('Y-m-d')) {
+                $result->read_at = null;
+            }
+
+            if ($result->score === 0) {
                 $result->read_at = now();
             }
 
@@ -30,4 +33,5 @@ class ScoreUnreadResults extends Command
 
         return 0;
     }
+
 }

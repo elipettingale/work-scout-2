@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:8001/api/";
+axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 
 export default {
   get: axios.get,
