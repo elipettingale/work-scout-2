@@ -15,12 +15,11 @@ class ResultScoreCalculator
 
     public function getScore()
     {
-        $score = 10;
+        $score = $this->skillScore();
 
         $score += $this->ir35Score();
         $score += $this->remoteScore();
         $score += $this->rateScore();
-        $score += $this->skillScore();
 
         return $score > 0 ? $score : 0;
     }
@@ -29,12 +28,8 @@ class ResultScoreCalculator
     {
         $ir35 = $this->data['ir35'];
 
-        if ($ir35 === null) {
-            return 0;
-        }
-
         if ($ir35 === false) {
-            return -10;
+            return -2;
         }
 
         return 0;
@@ -43,10 +38,6 @@ class ResultScoreCalculator
     private function remoteScore()
     {
         $remote = $this->data['remote'];
-
-        if ($remote === null) {
-            return 0;
-        }
 
         if ($remote === false) {
             return -2;
@@ -59,10 +50,6 @@ class ResultScoreCalculator
     {
         $maxRate = $this->data['max_rate'];
 
-        if ($maxRate === null) {
-            return 0;
-        }
-
         if ($maxRate <= 200) {
             return -2;
         }
@@ -72,20 +59,50 @@ class ResultScoreCalculator
 
     private function skillScore()
     {
+        $total = 0;
+        $matched = 0;
+
+        $badSkills = [
+            "c#", "c++", "magento", "java ", "java\.", "python", ".net", "ruby"
+        ];
+
+        $neutralSkills = [
+            "redux", "react native", "kubernetes", "angular", "next.js", "aws", "angular", "shopify"
+        ];
+
+        $goodSkills = [
+            "laravel", "wordpress", "php", "javascript", "docker", "vue", "react", "sql", "mongo"
+        ];
+
         $text = new Text($this->data['title'] . $this->data['description']);
 
-        if ($text->containsAny(['c#', 'c++', 'magento', 'python', 'java '])) {
-            return -10;
+        foreach ($badSkills as $skill) {
+            if ($text->contains($skill)) {
+                $total -= 10;
+                $matched++;
+                $test[] = $skill;
+            }
         }
 
-        if ($text->containsAny(['aws'])) {
-            return -3;
+        foreach ($neutralSkills as $skill) {
+            if ($text->contains($skill)) {
+                $matched++;
+                $test[] = $skill;
+            }
         }
 
-        if ($text->containsAny(['redux'])) {
-            return -1;
+        foreach ($goodSkills as $skill) {
+            if ($text->contains($skill)) {
+                $total += 10;
+                $matched++;
+                $test[] = $skill;
+            }
         }
 
-        return 0;
+        if ($matched === 0) {
+            return 0;
+        }
+
+        return ceil($total / $matched);
     }
 }
