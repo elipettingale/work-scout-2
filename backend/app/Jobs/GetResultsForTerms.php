@@ -67,7 +67,7 @@ class GetResultsForTerms implements ShouldQueue
 
         $result->save();
 
-        // event(new ResultCreated($result));
+        event(new ResultCreated($result));
 
         return true;
     }
