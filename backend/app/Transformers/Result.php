@@ -17,7 +17,8 @@ class Result
             'ir35' => self::getIr35($result),
             'remote' => $result->remote ? 'Yes' : 'No',
             'description' => $result->description,
-            'url' => $result->url
+            'url' => $result->url,
+            'posted_at' => $result->posted_at->format('d/m/Y')
         ];
     }
 

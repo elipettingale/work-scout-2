@@ -14,7 +14,17 @@ export function highlightKeywords(html) {
     "typescript",
     "docker",
   ];
-  const badKeywords = ["inside ir35", "aws", "hybrid", "redux", "node", "java"];
+  const badKeywords = [
+    "inside ir35",
+    "on-site",
+    "aws",
+    "hybrid",
+    "redux",
+    "node",
+    "java",
+    "ruby",
+    ".NET",
+  ];
   const neutralKeywords = [
     "£\\d+ ?- ?£?\\d+",
     "£\\d+",
@@ -22,6 +32,7 @@ export function highlightKeywords(html) {
     "\\d+-\\d+ month",
     "\\d+ months",
     "\\d+ month",
+    "remotely",
     "remote",
     "ir35",
   ];

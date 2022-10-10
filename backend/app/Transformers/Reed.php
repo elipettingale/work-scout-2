@@ -5,6 +5,7 @@ namespace App\Transformers;
 use App\Contracts\Transformer;
 use App\Enums\JobSite;
 use App\Helpers\ResultParser;
+use Carbon\Carbon;
 
 class Reed implements Transformer 
 {
@@ -28,7 +29,8 @@ class Reed implements Transformer
             'ir35' => $parser->getIr35(),
             'remote' => $parser->getRemote(),
             'description' => $rawDescription,
-            'url' => $data['jobUrl']
+            'url' => $data['jobUrl'],
+            'posted_at' => Carbon::createFromFormat('d/m/Y', $data['datePosted'])
         ];
     }
 }

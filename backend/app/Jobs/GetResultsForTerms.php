@@ -61,13 +61,13 @@ class GetResultsForTerms implements ShouldQueue
         $result->score = $score;
         $result->raw = $raw;
 
-        if ($score === 0) {
+        if (($score === 0) || ($result->posted_at < now()->subWeeks(2))) {
             $result->read_at = now();
         }
 
         $result->save();
 
-        event(new ResultCreated($result));
+        // event(new ResultCreated($result));
 
         return true;
     }

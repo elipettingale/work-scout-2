@@ -19,10 +19,12 @@ class Result extends Model
         'ir35',
         'remote',
         'description',
-        'url'
+        'url',
+        'posted_at'
     ];
     
     protected $dates = [
+        'posted_at',
         'read_at'
     ];
 
@@ -52,10 +54,5 @@ class Result extends Model
 
         $this->read_at = now();
         $this->save();
-    }
-
-    public function transform()
-    {
-        
     }
 }
