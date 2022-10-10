@@ -6,6 +6,7 @@ import {
   getResults,
   getResult,
 } from "../services/resultService";
+import { highlightKeywords } from "../helpers/text";
 
 class Results extends Component {
   state = {
@@ -111,22 +112,7 @@ class Results extends Component {
 
   renderDescription(result) {
     let { description } = result;
-    const keywords = [
-      "ir35",
-      "£\\d+ ?- ?£?\\d+",
-      "£\\d+",
-      "remote",
-      "\\d+ months",
-    ];
-
-    keywords.forEach((keyword) => {
-      const regex = new RegExp(`(${keyword})`, "gi");
-
-      description = description.replaceAll(
-        regex,
-        '<span class="keyword">$1</span>'
-      );
-    });
+    description = highlightKeywords(description);
 
     return (
       <div

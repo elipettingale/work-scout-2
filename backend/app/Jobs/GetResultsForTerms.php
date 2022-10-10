@@ -56,8 +56,6 @@ class GetResultsForTerms implements ShouldQueue
         $scoreCalculator = new ResultScoreCalculator($data);
         $score = $scoreCalculator->getScore();
 
-        // todo: add score based on skills
-
         $result = new Result();
         $result->fill($data);
         $result->score = $score;
@@ -66,9 +64,6 @@ class GetResultsForTerms implements ShouldQueue
         if ($score === 0) {
             $result->read_at = now();
         }
-
-        $result->keywords = []; // todo: scan for keywords
-        // todo: check for duplicates
 
         $result->save();
 

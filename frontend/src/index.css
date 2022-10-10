@@ -64,6 +64,18 @@ body {
   @apply bg-yellow-200;
 }
 
+.keyword.is-good {
+  @apply bg-green-200;
+}
+
+.keyword.is-bad {
+  @apply bg-red-200;
+}
+
+.keyword .keyword {
+  background: none;
+}
+
 .score {
   @apply flex items-center;
 }
