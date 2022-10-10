@@ -1,0 +1,43 @@
+{
+    "good": [
+        "outside ir35",
+        "fully remote",
+        "100% remotely",
+        "100% remote",
+        "javascript",
+        "php",
+        "laravel",
+        "react",
+        "vue.js",
+        "vue",
+        "wordpress",
+        "typescript",
+        "docker",
+        "sql",
+        "mongodb",
+        "mongo"
+    ],
+    "bad": [
+        "inside ir35",
+        "on-site",
+        "aws",
+        "hybrid",
+        "redux",
+        "node",
+        "java",
+        "ruby",
+        ".NET",
+        "python"
+    ],
+    "neutral": [
+        "£\\d+ ?- ?£?\\d+",
+        "£\\d+",
+        "\\d+-\\d+ months",
+        "\\d+-\\d+ month",
+        "\\d+ months",
+        "\\d+ month",
+        "remotely",
+        "remote",
+        "ir35"
+    ]
+}

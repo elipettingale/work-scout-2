@@ -1,53 +1,17 @@
-export function highlightKeywords(html) {
-  const goodKeywords = [
-    "outside ir35",
-    "fully remote",
-    "100% remotely",
-    "100% remote",
-    "javascript",
-    "php",
-    "laravel",
-    "react",
-    "vue.js",
-    "vue",
-    "wordpress",
-    "typescript",
-    "docker",
-  ];
-  const badKeywords = [
-    "inside ir35",
-    "on-site",
-    "aws",
-    "hybrid",
-    "redux",
-    "node",
-    "java",
-    "ruby",
-    ".NET",
-  ];
-  const neutralKeywords = [
-    "£\\d+ ?- ?£?\\d+",
-    "£\\d+",
-    "\\d+-\\d+ months",
-    "\\d+-\\d+ month",
-    "\\d+ months",
-    "\\d+ month",
-    "remotely",
-    "remote",
-    "ir35",
-  ];
+import keywords from "../config/keywords.json";
 
-  goodKeywords.forEach((keyword) => {
+export function highlightKeywords(html) {
+  keywords.good.forEach((keyword) => {
     const regex = new RegExp(`(${keyword})`, "gi");
     html = html.replaceAll(regex, '<span class="keyword is-good">$1</span>');
   });
 
-  badKeywords.forEach((keyword) => {
+  keywords.bad.forEach((keyword) => {
     const regex = new RegExp(`(${keyword})`, "gi");
     html = html.replaceAll(regex, '<span class="keyword is-bad">$1</span>');
   });
 
-  neutralKeywords.forEach((keyword) => {
+  keywords.neutral.forEach((keyword) => {
     const regex = new RegExp(`(${keyword})`, "gi");
     html = html.replaceAll(regex, '<span class="keyword">$1</span>');
   });

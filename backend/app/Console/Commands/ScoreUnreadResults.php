@@ -17,14 +17,13 @@ class ScoreUnreadResults extends Command
             ->get();
 
         foreach ($results as $result) {
-            $date = Carbon::createFromFormat('d/m/Y', $result->raw['datePosted']);
-            $result->created_at = $date;
+            $scoreCalculator = new ResultScoreCalculator($result->toArray());
+            $score = $scoreCalculator->getScore();
+            $result->score = $score;
 
-            if ($date->format('Y-m-d') >= now()->subWeek()->format('Y-m-d')) {
-                $result->read_at = null;
-            }
+            $this->info($score);
 
-            if ($result->score === 0) {
+            if ($score === 0) {
                 $result->read_at = now();
             }
 

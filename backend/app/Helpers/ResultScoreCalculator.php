@@ -30,7 +30,7 @@ class ResultScoreCalculator
         $ir35 = $this->data['ir35'];
 
         if ($ir35 === null) {
-            return -3;
+            return 0;
         }
 
         if ($ir35 === false) {
@@ -45,11 +45,11 @@ class ResultScoreCalculator
         $remote = $this->data['remote'];
 
         if ($remote === null) {
-            return -3;
+            return 0;
         }
 
         if ($remote === false) {
-            return -3;
+            return -2;
         }
 
         return 0;
@@ -60,15 +60,11 @@ class ResultScoreCalculator
         $maxRate = $this->data['max_rate'];
 
         if ($maxRate === null) {
-            return -5;
+            return 0;
         }
 
         if ($maxRate <= 200) {
-            return -3;
-        }
-
-        if ($maxRate <= 300) {
-            return -1;
+            return -2;
         }
 
         return 0;
@@ -76,28 +72,20 @@ class ResultScoreCalculator
 
     private function skillScore()
     {
-        $skills = [
-            'laravel',
-            'wordpress',
-            'vue',
-            'php',
-            'developer',
-            'backend',
-            'react',
-            'frontend',
-            'mysql'
-        ];
-
         $text = new Text($this->data['title'] . $this->data['description']);
 
-        if ($text->containsAny(['c#', 'c++', 'magento'])) {
-            return -5;
+        if ($text->containsAny(['c#', 'c++', 'magento', 'python', 'java '])) {
+            return -10;
         }
 
-        if ($text->containsAtLeast($skills, 3)) {
-            return 0;
+        if ($text->containsAny(['aws'])) {
+            return -3;
         }
 
-        return -3;
+        if ($text->containsAny(['redux'])) {
+            return -1;
+        }
+
+        return 0;
     }
 }
