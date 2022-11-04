@@ -26,8 +26,10 @@
         "node",
         "java",
         "ruby",
-        ".NET",
-        "python"
+        "\\.NET",
+        "python",
+        "kubernetes",
+        "react native"
     ],
     "neutral": [
         "£\\d+ ?- ?£?\\d+",

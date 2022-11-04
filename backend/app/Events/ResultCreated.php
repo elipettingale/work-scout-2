@@ -33,7 +33,7 @@ class ResultCreated implements ShouldBroadcastNow
 
     public function broadcastWhen()
     {
-        return $this->result->score > 0;
+        return env('WEBSOCKET_ENABLED');
     }
 
     public function broadcastOn()

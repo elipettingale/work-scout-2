@@ -63,7 +63,7 @@ class ResultScoreCalculator
         $matched = 0;
 
         $badSkills = [
-            "c#", "c++", "magento", "java ", "java\.", "python", ".net", "ruby"
+            "c#", "c++", "magento", "java ", "java\.", "python", "\.net", "ruby"
         ];
 
         $neutralSkills = [
