@@ -21,10 +21,6 @@ class ScoreResult extends Command
 
         $this->info($score);
 
-        // if ($score === 0) {
-        //     $result->read_at = now();
-        // }
-
         $result->save();
 
         return 0;

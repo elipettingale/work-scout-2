@@ -9,7 +9,7 @@ use Carbon\Carbon;
 
 class ScoreUnreadResults extends Command
 {
-    protected $signature = 'app:score-unread-results';
+    protected $signature = 'app:score-unread-results {--debug}';
 
     public function handle()
     {
@@ -22,6 +22,10 @@ class ScoreUnreadResults extends Command
             $result->score = $score;
 
             $this->info($score);
+            
+            if (!$this->option('debug') && $score === 0) {
+                $result->read_at = now();
+            }
 
             $result->save();
         }
