@@ -11,8 +11,8 @@ use Illuminate\Queue\SerializesModels;
 use App\Contracts\ApiService;
 use App\Contracts\Transformer;
 use App\Models\Result;
-use App\Helpers\ResultScoreCalculator;
 use App\Events\ResultCreated;
+use App\Helpers\ResultValidator;
 
 class GetResultsForTerms implements ShouldQueue
 {
@@ -53,17 +53,13 @@ class GetResultsForTerms implements ShouldQueue
         $raw = $this->service->getFullResult($reference);
         $data = $this->transformer->getData($raw);
 
-        $scoreCalculator = new ResultScoreCalculator($data);
-        $score = $scoreCalculator->getScore();
-
         $result = new Result();
         $result->fill($data);
-        $result->score = $score;
         $result->raw = $raw;
 
-        // if (($score === 0) || ($result->posted_at < now()->subWeeks(2))) {
-        //     $result->read_at = now();
-        // }
+        if (!ResultValidator::isValid($result)) {
+            $result->read_at = now();
+        }
 
         $result->save();
 

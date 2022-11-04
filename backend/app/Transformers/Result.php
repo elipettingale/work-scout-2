@@ -11,7 +11,6 @@ class Result
         return [
             'id' => $result->id,
             'title' => $result->title,
-            'score' => $result->score,
             'rate' => self::getRate($result),
             'length' => self::getLength($result),
             'ir35' => self::getIr35($result),
