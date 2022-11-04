@@ -23,10 +23,6 @@ class ScoreUnreadResults extends Command
 
             $this->info($score);
 
-            if ($score === 0) {
-                $result->read_at = now();
-            }
-
             $result->save();
         }
 

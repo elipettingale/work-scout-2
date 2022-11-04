@@ -15,7 +15,10 @@
         "docker",
         "sql",
         "mongodb",
-        "mongo"
+        "mongo",
+        "html",
+        "css",
+        " git "
     ],
     "bad": [
         "inside ir35",

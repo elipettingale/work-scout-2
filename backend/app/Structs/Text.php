@@ -73,6 +73,19 @@ class Text
         return $contains >= $count;
     }
 
+    public function containsLessThan(array $values, $count, bool $strict = false): bool
+    {
+        $contains = 0;
+
+        foreach ($values as $value) {
+            if ($this->contains($value, $strict)) {
+                $contains++;
+            }
+        }
+
+        return $contains < $count;
+    }
+
     public function __toString(): string
     {
         return $this->text;
