@@ -3,10 +3,15 @@
 return [
 
     'terms' => [
+        ['web', 'developer'],
+        ['php'],
+        ['javascript'],
         ['laravel'],
         ['wordpress'],
         ['vue'],
-        ['react']
+        ['react'],
+        ['node'],
+        ['aws']
     ]
 
 ];

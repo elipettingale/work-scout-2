@@ -34,6 +34,9 @@ class Reed implements ApiService
         $keywords = implode('+', $terms);
         $resultsToSkip = ($page * 100) - 100;
 
+        // todo: improve performance
+        // query only jobs posted since last check, or last 3 days
+
         $response = $this->get("search?keywords={$keywords}&contract=true&resultsToSkip={$resultsToSkip}");
         
         return json_decode($response, true)['results'];

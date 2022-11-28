@@ -6,7 +6,7 @@ import {
   getResults,
   getResult,
 } from "../services/resultService";
-import { highlightKeywords } from "../helpers/text";
+import { highlightKeywords, getScore } from "../helpers/keywords";
 
 class Results extends Component {
   state = {
@@ -17,6 +17,10 @@ class Results extends Component {
   componentDidMount = async () => {
     const { data: results } = await getResults();
 
+    results.forEach((result) => {
+      result.score = getScore(result.description);
+    });
+
     if (results.length > 0) {
       this.setState({
         results: results,
@@ -26,6 +30,8 @@ class Results extends Component {
 
     window.Echo.channel("results").listen("ResultCreated", async (e) => {
       const { data: result } = await getResult(e.id);
+      result.score = getScore(result.description);
+
       const results = [result, ...this.state.results];
 
       this.setState({

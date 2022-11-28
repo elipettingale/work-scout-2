@@ -27,7 +27,9 @@
             "mongo",
             "html",
             "css",
-            "git"
+            "git",
+            "rest api",
+            "restful"
         ]
     },
     {
@@ -36,15 +38,15 @@
             "inside ir35",
             "on-site",
             "aws",
-            "redux",
             "node",
             "java",
             "ruby",
             "\\.NET",
             "python",
-            "kubernetes",
             "react native",
-            "magento"
+            "magento",
+            "c\\+\\+",
+            "c#"
         ]
     },
     {
@@ -60,7 +62,12 @@
             "remote",
             "ir35",
             "hybrid",
-            "london"
+            "london",
+            "redux",
+            "kubernetes",
+            "k8",
+            "CI\\/CD",
+            "CICD"
         ]
     }
 ]
